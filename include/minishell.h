@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 01:32:13 by abelayad          #+#    #+#             */
-/*   Updated: 2024/07/26 12:50:13 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/26 13:05:04 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,6 @@ typedef struct s_minishell
 	t_node			*ast;
 	t_env			*envlst;
 }					t_minishell;
-
-typedef struct
-{
-	t_minishell *minishell;
-}	sigaction_context_t;
 
 typedef struct	s_signal_handler
 {
