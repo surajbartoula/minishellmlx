@@ -16,6 +16,7 @@ static void	ft_heredoc_sigint_handler(int signum)
 {
 	(void)signum;
 	g_sig_handler.cleanup_needed = true;
+	exit(SIGINT);
 }
 
 void	ft_heredoc(t_io_node *io, int p[2], t_minishell *g_minishell)
@@ -24,6 +25,8 @@ void	ft_heredoc(t_io_node *io, int p[2], t_minishell *g_minishell)
 	char	*quotes;
 
 	signal(SIGINT, ft_heredoc_sigint_handler);
+	if (g_sig_handler.cleanup_needed)
+		ft_clean_ms(g_minishell);
 	quotes = io->value;
 	while (*quotes && *quotes != '"' && *quotes != '\'')
 		quotes++;
@@ -43,8 +46,6 @@ void	ft_heredoc(t_io_node *io, int p[2], t_minishell *g_minishell)
 		}
 		free(line);
 	}
-	if (g_sig_handler.cleanup_needed)
-		ft_clean_ms(g_minishell);
 	exit(0);
 }
 
