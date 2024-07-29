@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 20:07:14 by abelayad          #+#    #+#             */
-/*   Updated: 2024/07/26 11:00:35 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:42:01 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef enum e_token_type
 	T_DLESS,
 	T_DGREAT,
 	T_PIPE,
-	T_O_PARENT,
-	T_C_PARENT,
+	T_O_PARENT,   //opening parenthesis
+	T_C_PARENT,  //closing parenthesis
 	T_AND,
 	T_OR,
 	T_NL,

@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 22:55:17 by abelayad          #+#    #+#             */
-/*   Updated: 2024/07/26 01:13:55 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:42:41 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_node	*ft_term(t_minishell *g_minishell)
 	t_node	*node;
 
 	if (g_minishell->parse_err.type)
-		return (NULL);
+		return (NULL); //down checking if current token is binary operator.
 	if (ft_curr_token_is_binop(g_minishell) || g_minishell->curr_token->type == T_C_PARENT)
 		return (ft_set_parse_err(E_SYNTAX, g_minishell), NULL);
 	else if (g_minishell->curr_token->type == T_O_PARENT)
