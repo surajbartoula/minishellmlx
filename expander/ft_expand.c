@@ -6,7 +6,7 @@
 /*   By: sbartoul <sbartoul@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:43:55 by abelayad          #+#    #+#             */
-/*   Updated: 2024/07/26 00:48:56 by sbartoul         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:13:54 by sbartoul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_handle_dollar(char *str, size_t *i, t_minishell *g_minishell)
 	else if (str[*i] == '?')
 	{
 		(*i)++;
-		return (ft_itoa(g_minishell->exit_s));
+		return (ft_itoa(g_minishell->exit_s)); //get the exit status and convert into string.
 	}
 	else if (!ft_is_valid_var_char(str[*i]))
 		return (ft_strdup("$"));
@@ -35,7 +35,7 @@ char	*ft_handle_dollar(char *str, size_t *i, t_minishell *g_minishell)
 	while (ft_is_valid_var_char(str[*i]))
 		(*i)++;
 	var = ft_substr(str, start, *i - start);
-	env_val = ft_get_envlst_val(var, g_minishell);
+	env_val = ft_get_envlst_val(var, g_minishell); //Get the value from environ variable.
 	if (!env_val)
 		return (free(var), ft_strdup(""));
 	return (free(var), ft_strdup(env_val));
@@ -59,7 +59,7 @@ static char	*ft_cmd_pre_expander(char *str, t_minishell *g_minishell)
 		else
 			ret = ft_strjoin_f(ret, ft_handle_normal_str(str, &i));
 	}
-	return (ret);
+	return (ret); //eg 'Hello' "$USER" world -> "Hello suraj world"
 }
 
 char	**ft_expand(char *str, t_minishell *g_minishell)
@@ -68,17 +68,17 @@ char	**ft_expand(char *str, t_minishell *g_minishell)
 	char	**globbed;
 	size_t	i;
 
-	str = ft_cmd_pre_expander(str, g_minishell);
+	str = ft_cmd_pre_expander(str, g_minishell); //"Hello $USER, Good morning." *.txt -> "Hello suraj, Good morning."
 	if (!str)
 		return (NULL);
 	str = ft_clean_empty_strs(str);
 	if (!str)
 		return (NULL);
-	expanded = ft_expander_split(str);
+	expanded = ft_expander_split(str); //["Hello", "suraj", "Good", "morning."]
 	free(str);
 	if (!expanded)
 		return (NULL);
-	globbed = ft_globber(expanded);
+	globbed = ft_globber(expanded); //"*.txt" -> "file1.txt", "file2.txt"
 	if (!globbed)
 		return (NULL);
 	i = 0;
